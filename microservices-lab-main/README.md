@@ -1,72 +1,96 @@
+---
+
 # Microservices Lab — SE4010 / CTSE Lab 05
 
-Four Spring Boot services wired through a Spring Cloud Gateway, Dockerized and running on separate ports.
+This lab consists of four Spring Boot microservices connected through a Spring Cloud Gateway. All services are Dockerized and configured to run on different ports.
 
 ---
 
 ## 🖥 Services & Ports
 
-| Service        | Port | Description                      |
-|----------------|------|----------------------------------|
-| API Gateway    | 8080 | Routes requests to all services  |
-| Item Service   | 8081 | CRUD for items                   |
-| Order Service  | 8082 | Place and view orders            |
-| Payment Service| 8083 | Process and view payments        |
+| Service         | Port | Description                                    |
+| --------------- | ---- | ---------------------------------------------- |
+| API Gateway     | 8080 | Handles routing to all backend services        |
+| Item Service    | 8081 | Provides CRUD operations for items             |
+| Order Service   | 8082 | Manages order placement and retrieval          |
+| Payment Service | 8083 | Handles payment processing and status checking |
 
 ---
 
-## ⚡ Run Instructions
+## ⚡ Running the Application
 
-### Build & Run Everything
+### Build and Start All Services
+
+### 1️⃣ Build JAR files (skip tests)
 
 ```bash
-# 1. Build all JARs (skip tests)
 (cd item_service && ./mvnw package -DskipTests)
 (cd order_service && ./mvnw package -DskipTests)
 (cd payment_service && ./mvnw package -DskipTests)
 (cd api_gateway && ./mvnw package -DskipTests)
+```
 
-# 2. Start all services with Docker Compose
+### 2️⃣ Launch services using Docker Compose
+
+```bash
 docker-compose up --build
+```
 
-# Run in background (detached mode)
+Run in detached mode (background):
+
+```bash
 docker-compose up -d
+```
 
-# 3. Check running containers
+### 3️⃣ Check active containers
+
+```bash
 docker ps
+```
 
-# 4. View logs for a specific service
+### 4️⃣ View logs of a specific service
+
+```bash
 docker-compose logs item-service
+```
 
-# 5. Stop and remove all containers
+### 5️⃣ Stop and remove all containers
+
+```bash
 docker-compose down
+```
 
-🔗 API Endpoints (via API Gateway: http://localhost:8080)
+---
 
-| Method | Path              | Description                      |
-| ------ | ----------------- | -------------------------------- |
-| GET    | /items            | List all items                   |
-| POST   | /items            | Add a new item (plain text body) |
-| GET    | /items/{id}       | Get item by index                |
-| GET    | /orders           | List all orders                  |
-| POST   | /orders           | Place an order                   |
-| GET    | /orders/{id}      | Get order by ID                  |
-| GET    | /payments         | List all payments                |
-| POST   | /payments/process | Process a payment                |
-| GET    | /payments/{id}    | Get payment status by ID         |
+## 🔗 API Endpoints
 
+(All requests must go through the API Gateway: `http://localhost:8080`)
 
-🧪 Testing
+| Method | Endpoint          | Description                         |
+| ------ | ----------------- | ----------------------------------- |
+| GET    | /items            | Retrieve all items                  |
+| POST   | /items            | Create a new item (plain text body) |
+| GET    | /items/{id}       | Retrieve an item by index           |
+| GET    | /orders           | Retrieve all orders                 |
+| POST   | /orders           | Create/place a new order            |
+| GET    | /orders/{id}      | Retrieve order by ID                |
+| GET    | /payments         | Retrieve all payments               |
+| POST   | /payments/process | Process a payment                   |
+| GET    | /payments/{id}    | Retrieve payment status by ID       |
 
-1.Import microservices-lab.postman_collection.json into Postman.
+---
 
-2.Make sure Docker containers are running.
+## 🧪 Testing Instructions
 
-3.Test all endpoints via the API Gateway (localhost:8080), not individual service ports.
+1. Import `microservices-lab.postman_collection.json` into Postman.
+2. Ensure all Docker containers are running.
+3. Test every endpoint using the API Gateway (`localhost:8080`) — do not access individual service ports directly.
 
+---
 
-📂 Repository Structure
+## 📂 Project Structure
 
+```
 /microservices-lab
 │
 ├─ item_service/
@@ -76,5 +100,6 @@ docker-compose down
 ├─ docker-compose.yml
 ├─ microservices-lab.postman_collection.json
 └─ README.md
+```
 
-
+---
