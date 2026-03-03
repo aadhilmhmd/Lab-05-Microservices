@@ -1,0 +1,102 @@
+{
+  "info": {
+    "name": "Microservices Lab",
+    "description": "Postman collection for SE4010 Microservices Lab",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Items Service",
+      "item": [
+        {
+          "name": "GET /items",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/items"
+          }
+        },
+        {
+          "name": "POST /items",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Tablet\"\n}"
+            },
+            "url": "http://localhost:8080/items"
+          }
+        },
+        {
+          "name": "GET /items/{id}",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/items/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders Service",
+      "item": [
+        {
+          "name": "GET /orders",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/orders"
+          }
+        },
+        {
+          "name": "POST /orders",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"item\": \"Laptop\",\n  \"quantity\": 2,\n  \"customerId\": \"C001\"\n}"
+            },
+            "url": "http://localhost:8080/orders"
+          }
+        },
+        {
+          "name": "GET /orders/{id}",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/orders/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payments Service",
+      "item": [
+        {
+          "name": "GET /payments",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/payments"
+          }
+        },
+        {
+          "name": "POST /payments/process",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderId\": 1,\n  \"amount\": 1299.99,\n  \"method\": \"CARD\"\n}"
+            },
+            "url": "http://localhost:8080/payments/process"
+          }
+        },
+        {
+          "name": "GET /payments/{id}",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/payments/1"
+          }
+        }
+      ]
+    }
+  ]
+}
